@@ -8,6 +8,7 @@
 #include <string>
 #include <stack>
 #include <queue>
+#include <iterator>
 
 using namespace std;
 
@@ -285,6 +286,67 @@ void myPriorityQueue()
     cout << endl;
 }
 
+void vector_operator()
+{
+
+    vector<int> vec;
+
+    cout << "size: " << vec.size() << endl;
+    cout << "is empty: " << vec.empty() << endl;
+    cout << "max_size: " << vec.max_size() << endl;
+    cout << "capacity: " << vec.capacity() << endl;
+
+    cout << endl;
+
+    vector<int> vec1;
+
+    vec1.reserve(12);
+
+    for(int i = 0; i < 5; ++i)
+    {
+        vec1.push_back(i);
+    }
+
+    cout << "size: " << vec1.size() << endl;
+    cout << "is empty: " << vec1.empty() << endl;
+    cout << "max_size: " << vec1.max_size() << endl;
+    cout << "capacity: " << vec1.capacity() << endl;
+
+    vector<int>::iterator iter = vec1.begin();
+    cout << *iter << endl;
+
+    int arr[10] = {9,8,7,6,5,4,3,2,1,0};
+
+    //vec1.assign(arr, sizeof(arr)/sizeof(int));
+    cout << "sizeof(arr)/sizeof(int): " << sizeof(arr)/sizeof(int) << endl;
+
+    vec1.assign(arr, arr+9);
+
+    copy(vec1.begin(), vec1.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    //vec1.erase(iter);
+    //vec1.erase(iter);
+    vec1.insert(iter, 1000);
+
+    cout << "size: " << vec1.size() << endl;
+    cout << "is empty: " << vec1.empty() << endl;
+    cout << "max_size: " << vec1.max_size() << endl;
+    cout << "capacity: " << vec1.capacity() << endl;
+
+    copy(vec1.begin(), vec1.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    cout << *iter << endl;
+}
+
+void vector_operator1()
+{
+    vector<int> vec1;
+    vector<int> vec2(2);
+    vector<int> vec3(2,10);
+}
+
 int main()
 {
     //myVector();
@@ -299,13 +361,17 @@ int main()
 
     //myMap();
 
-    myMultimap();
+    //myMultimap();
 
     //myStack();
 
     //myQueue();
 
     //myPriorityQueue();
+
+    //vector_operator();
+
+    vector_operator1();
 
     return 0;
 }
