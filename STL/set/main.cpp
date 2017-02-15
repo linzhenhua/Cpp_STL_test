@@ -34,7 +34,7 @@ void mySet()
 
     set<int, compClass> mySet3(arr, arr+sizeof(arr)/sizeof(int));
 
-    //mySet3 = mySet2;
+    //swap(mySet3, mySet2);
     copy(mySet3.begin(), mySet3.end(), ostream_iterator<int>(cout, " "));
     cout << endl;
 
@@ -124,11 +124,39 @@ void mySet1()
     }
 }
 
+void mySet2()
+{
+    int arr[9] = {0,1,2,4,5,6,7,8,9};
+    set<int> mySet1(arr, arr+sizeof(arr)/sizeof(int));
+    copy(mySet1.begin(), mySet1.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    cout << mySet1.size() << endl;
+    cout << mySet1.empty() << endl;
+    cout << mySet1.max_size() << endl;
+    cout << mySet1.count(3) << endl;     //可用于判断一个元素是否存在于set容器
+
+    if(mySet1.find(9) != mySet1.end())
+    {
+        cout << "9 is an element of myset1." << endl;
+    }
+    else
+    {
+        cout << "9 is not an element of myset1." << endl;
+    }
+
+    cout << *mySet1.lower_bound(3) << endl;
+    cout << *mySet1.upper_bound(3) << endl;
+    cout << *mySet1.equal_range(3).first << " and " << *mySet1.equal_range(3).second << endl;
+}
+
 int main()
 {
     //mySet();
 
-    mySet1();
+    //mySet1();
+
+    mySet2();
 
     return 0;
 }
