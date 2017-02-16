@@ -5,10 +5,10 @@
 #include <iterator>
 #include <utility>
 #include <iomanip>
+#include <cctype>
 
 using namespace std;
 
-/*
 //map都是针对key排序的，所以key是什么类型，比较函数就是什么类型
 bool fncomp(const int& lhs, const int& rhs)
 {
@@ -23,7 +23,6 @@ public:
         return lhs > rhs;
     }
 };
-
 
 void myMap1()
 {
@@ -142,8 +141,6 @@ void myMap2()
     cout << endl;
 }
 
-*/
-
 //实例：将map当做关联式数组
 //用来反映股票行情
 void stock()
@@ -236,6 +233,118 @@ void dict()
     }
 }
 
+//仿函数
+template<class K, class V>
+class Value_equals{
+private:
+    V value;
+
+public:
+    Value_equals(const V& v):value(v){}
+
+    bool operator() (pair<const K, V> elem) const
+    {
+        return elem.second == value;
+    }
+};
+
+//搜寻具有某特定实值的元素
+void mySearch()
+{
+    typedef map<float, float> FloatFloatMap;
+    FloatFloatMap coll;
+    FloatFloatMap::iterator pos;
+
+    coll.insert(make_pair(1, 7));
+    coll.insert(make_pair(2, 4));
+    coll.insert(make_pair(3, 2));
+    coll.insert(make_pair(4, 3));
+    coll.insert(make_pair(5, 6));
+    coll.insert(make_pair(6, 1));
+    coll.insert(make_pair(7, 3));
+
+    pos = coll.find(3.0);
+    if(pos != coll.end())
+    {
+        cout << pos->first << ": " << pos->second << endl;
+    }
+
+    pos = find_if(coll.begin(), coll.end(), Value_equals<float, float>(3.0));
+    if(pos != coll.end())
+    {
+        cout << pos->first << ": " << pos->second << endl;
+    }
+}
+
+class RuntimeStringCmp{
+public:
+    enum cmp_mode{normal, nocase};   //0,1
+
+private:
+    //为什么const变量初始化不用赋值，因为可以在类的初始化列表里初始化
+    const cmp_mode mode;
+
+    static bool nocase_compare(char c1, char c2)
+    {
+        return toupper(c1) < toupper(c2);    //toupper()函数将小写字母变成大写字母
+    }
+
+public:
+    RuntimeStringCmp(cmp_mode m = normal):mode(m){}
+
+    bool operator()(const string& s1, const string& s2) const
+    {
+        if(mode == normal)
+        {
+            return s1 < s2;
+        }
+        else
+        {
+            return lexicographical_compare(s1.begin(), s1.end(),
+                                            s2.begin(), s2.end(),
+                                            nocase_compare);
+        }
+    }
+};
+
+typedef map<string, string, RuntimeStringCmp> StringStringMap;
+
+void fillAndPrint(StringStringMap& coll)
+{
+    coll["Deutschland"] = "Germany";
+    coll["deutsch"] = "German";
+    coll["Haken"] = "snag";
+    coll["arbeiten"] = "work";
+    coll["Hund"] = "dog";
+    coll["gehen"] = "go";
+    coll["Unternehmen"] = "enterprise";
+    coll["unternehmen"] = "undertake";
+    coll["gehen"] = "walk";
+    coll["Bestatter"] = "undertaker";
+
+    StringStringMap::iterator pos;
+
+    cout.setf(ios::left, ios::adjustfield);
+    for(pos = coll.begin(); pos != coll.end(); ++pos)
+    {
+        cout << setw(15) << pos->first.c_str() << " " << pos->second << endl;
+    }
+    cout << endl;
+}
+
+//map的综合运用
+void myMap3()
+{
+    StringStringMap coll1;
+    fillAndPrint(coll1);
+
+    RuntimeStringCmp ignorecase(RuntimeStringCmp::nocase);
+
+    StringStringMap coll2(ignorecase);
+
+    fillAndPrint(coll2);
+}
+
 int main()
 {
     //myMap1();
@@ -244,7 +353,11 @@ int main()
 
     //stock();
 
-    dict();
+    //dict();
+
+    //mySearch();
+
+    myMap3();
 
     return 0;
 }
