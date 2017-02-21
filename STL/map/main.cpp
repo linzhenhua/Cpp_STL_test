@@ -284,6 +284,8 @@ private:
     //为什么const变量初始化不用赋值，因为可以在类的初始化列表里初始化
     const cmp_mode mode;
 
+    //bool nocase_compare(char c1, char c2)的指针是成员函数指针
+    //bool (RuntimeStringCmp::*nocase_compare) (char, char);
     static bool nocase_compare(char c1, char c2)
     {
         return toupper(c1) < toupper(c2);    //toupper()函数将小写字母变成大写字母

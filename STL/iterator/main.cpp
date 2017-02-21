@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <vector>
 #include <list>
@@ -105,13 +104,58 @@ void myReverse()
     //cout << *reveIter1 << endl;
 }
 
+void myPointer()
+{
+    int *ptr = new int;
+
+    int x = 10;
+
+    *ptr = x;
+
+    cout << *ptr << endl;
+
+    *ptr = 11;
+
+    cout << *ptr << endl;
+
+    delete ptr;
+}
+
+void myDistance()
+{
+    list<int> myList;
+
+    for(int i = -2; i < 9; ++i)
+    {
+        myList.push_back(i);
+    }
+
+    copy(myList.begin(), myList.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    list<int>::iterator pos;
+
+    pos = find(myList.begin(), myList.end(), 2);
+    if(pos != myList.end())
+    {
+        int dis;
+        dis = distance(myList.begin(), pos);
+
+        cout << dis << endl;
+    }
+}
+
 int main()
 {
     //myIterator();
 
     //myStream();
 
-    myReverse();
+    //myReverse();
+
+    //myPointer();
+
+    myDistance();
 
     return 0;
 }

@@ -598,6 +598,26 @@ void del_elem(int elem)
     printf("%s\n", &vec2[0]);
 }
 
+void test_istream_iterator()
+{
+    //创建istream_iterator时可以直接将其绑定到一个流上，另一种方法不提供实参，则该迭代器指向超出末端位置
+    //创建ostream_iterator时可使用第二个可选的实参ostream_iterator<int> output(cout , " " ),使用空格作为输出流的分隔符
+    //ostream_iterator不提供超出末端迭代器
+    //定义并初始化输入流迭代器
+    //istream_iterator<int> cin_it(cin);
+    //istream_iterator<int> eof;
+    //对ivec进行初始化，当从cin_int读取cin的值不是int或者文件结尾时结束
+    //vector<int> ivec(cin_it , eof);
+
+    vector<int> ivec((istream_iterator<int>(cin)), (istream_iterator<int>()));
+    //对ivec中的数据进行排序
+    //sort(ivec.begin() , ivec.end());
+    //定义并初始化输出流迭代器
+    copy(ivec.begin(), ivec.end(), ostream_iterator<int>(cout , " " ));
+    //将其写入到output中
+    //unique_copy(ivec.begin() , ivec.end() , output);
+}
+
 int main()
 {
     //myVector();
@@ -626,7 +646,9 @@ int main()
 
     //vector_operator2();
 
-    del_elem(15);
+    //del_elem(15);
+
+    test_istream_iterator();
 
     return 0;
 }
