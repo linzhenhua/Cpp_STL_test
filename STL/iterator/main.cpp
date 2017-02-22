@@ -145,17 +145,44 @@ void myDistance()
     }
 }
 
+int fun()
+{
+    //int *p = nullptr;
+    int x = 10;
+
+    //p = &x;
+
+    return x;   //返回的临时变量是左值
+}
+
+void myVector()
+{
+    vector<int> myVec;
+
+    for(int i = 0; i < 10; ++i)
+    {
+        myVec.push_back(i);
+    }
+
+    sort(++myVec.begin(), myVec.end());
+}
+
 int main()
 {
     //myIterator();
 
-    //myStream();
+    myStream();
 
     //myReverse();
 
     //myPointer();
 
-    myDistance();
+    //myDistance();
+
+    //myVector();
+
+    //c++不允许任何修改基本类型(包括指针)临时值的行为，但对于类类型则允许
+    //++fun();
 
     return 0;
 }
