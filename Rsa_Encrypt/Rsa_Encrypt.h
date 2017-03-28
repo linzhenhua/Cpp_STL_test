@@ -1,5 +1,5 @@
 /******************************************************************************
-*    > File Name: Rsa_Encrypt.h
+*    > File Name: rsa_encrypt.h
 *
 *    >Description:
 *
@@ -13,8 +13,8 @@
 *    > Company:
 *
 ******************************************************************************/
-#ifndef Rsa_Encrypt_H
-#define Rsa_Encrypt_H
+#ifndef RSA_ENCRYPT_H
+#define RSA_ENCRYPT_H
 
 //RSAº”Ω‚√‹
 class RsaEncrypt{
@@ -83,4 +83,4 @@ private:
     int modular_multiplicative_inverse_;
 };
 
-#endif // Rsa_Encrypt_H
+#endif // RSA_ENCRYPT_H

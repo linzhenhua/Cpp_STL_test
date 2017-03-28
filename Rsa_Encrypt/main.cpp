@@ -18,12 +18,14 @@
 #include <string>
 #include <algorithm>
 
-#include "Rsa_Encrypt.h"
+#include "rsa_encrypt.h"
+#include "big_number.h"
 
 using namespace std;
 
 int main()
 {
+    /*
     RsaEncrypt rsa(61, 53);
 
     rsa.ProduceRsaKey();
@@ -35,14 +37,26 @@ int main()
     cout << "rsa.get_modular_multiplicative_inverse(): " << rsa.get_modular_multiplicative_inverse() << endl;
     cout << "rsa.get_aoLa: " << rsa.get_aoLa() << endl;
 
-    //¹«Ô¿(product,random_number) Ö»ÄÜ¼ÓÃÜÐ¡ÓÚproductµÄÕûÊý
-    unsigned int EncryptInfo;   //¼ÓÃÜºóµÄÐÅÏ¢
+    //å…¬é’¥(product,random_number) åªèƒ½åŠ å¯†å°äºŽproductçš„æ•´æ•°
+    unsigned int EncryptInfo;   //åŠ å¯†åŽçš„ä¿¡æ¯
     EncryptInfo = rsa.Encrypt(3232);
     cout << "EncryptInfo: " << EncryptInfo << endl;
 
-    unsigned int DecryptInfo;   //½âÃÜºóµÄÐÅÏ¢
+    unsigned int DecryptInfo;   //è§£å¯†åŽçš„ä¿¡æ¯
     DecryptInfo = rsa.Decrypt(EncryptInfo);
     cout << "DecryptInfo: " << DecryptInfo << endl;
+*/
+    BigNumber big_number1("123");
+    BigNumber big_number2("3");
+    BigNumber big_number3("");
+
+    //big_number3 = big_number1 + big_number2;
+
+    //big_number3 = big_number1 - big_number2;
+
+    big_number3 = big_number1 * big_number2;
+
+    big_number3.print();
 
     return 0;
 }

@@ -1,5 +1,5 @@
 /******************************************************************************
-*    > File Name: Key_Encrypt.cpp
+*    > File Name: key_encrypt.cpp
 *
 *    >Description:
 *
@@ -18,7 +18,7 @@
 #include <ctime>
 #include <cstdlib>
 
-#include "Rsa_Encrypt.h"
+#include "rsa_encrypt.h"
 
 using namespace std;
 

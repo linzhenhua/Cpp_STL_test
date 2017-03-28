@@ -1,5 +1,5 @@
 /******************************************************************************
-*    > File Name: Big_Number.h
+*    > File Name: big_number.h
 *
 *    >Description:
 *
@@ -20,37 +20,41 @@
 
 using namespace std;
 
-//´óÊıµÄ´¢´æ
+//å¤§æ•°çš„å‚¨å­˜è®¡ç®—
 class BigNumber{
 public:
-    //Ä¬ÈÏ¹¹Ôìº¯Êı
+    //é»˜è®¤æ„é€ å‡½æ•°
     BigNumber(const string &rhs);
 
-    //¸´ÖÆ¹¹Ôìº¯Êı
+    //å¤åˆ¶æ„é€ å‡½æ•°
     BigNumber(const BigNumber &rhs);
 
-    //ÖØÔØ=²Ù×÷·û
+    //é‡è½½=æ“ä½œç¬¦
     BigNumber& operator=(const BigNumber &rhs);
 
-    //Îö¹¹º¯Êı
+    //ææ„å‡½æ•°
     virtual ~BigNumber();
 
 public:
-    //¼Ó·¨
+    //åŠ æ³•ï¼ˆå¦‚æœæ˜¯æˆå‘˜å‡½æ•°ï¼Œè€Œä¸æ˜¯å‹å…ƒå‡½æ•°ï¼Œå‡½æ•°çš„å‚æ•°åªéœ€ä¸€ä¸ªï¼Œå› ä¸ºæœ‰ä¸€ä¸ªé»˜è®¤çš„thisæŒ‡é’ˆï¼‰
     friend BigNumber operator+(const BigNumber &lhs, const BigNumber &rhs);
 
-    //¼õ·¨
+    //å‡æ³•
     friend BigNumber operator-(const BigNumber &lhs, const BigNumber &rhs);
 
-    //³Ë·¨
+    //ä¹˜æ³•
     friend BigNumber operator*(const BigNumber &lhs, const BigNumber &rhs);
 
-    //³ı·¨
+    //é™¤æ³•
     friend BigNumber operator/(const BigNumber &lhs, const BigNumber &rhs);
 
+    void print() const
+    {
+        cout << big_number_ << endl;
+    }
 private:
-    string big_number_;     //ÓÃÓÚ±£´æ´óÊı
+    string big_number_;                //ç”¨äºä¿å­˜å¤§æ•°
+    static const int k_max_ = 1000;    //å¯ä»¥è®¡ç®—1000ä½çš„å¤§æ•°
 };
-
 
 #endif // BIG_NUNBER_H
