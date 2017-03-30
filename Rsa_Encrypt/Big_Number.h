@@ -45,13 +45,14 @@ public:
     //乘法
     friend BigNumber operator*(const BigNumber &lhs, const BigNumber &rhs);
 
-    //除法
-    friend BigNumber operator/(const BigNumber &lhs, const BigNumber &rhs);
+    //除法（未实现）
+    //friend BigNumber operator/(const BigNumber &lhs, const BigNumber &rhs);
 
     void print() const
     {
         cout << big_number_ << endl;
     }
+
 private:
     string big_number_;                //用于保存大数
     static const int k_max_ = 1000;    //可以计算1000位的大数

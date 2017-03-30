@@ -14,18 +14,15 @@
 *
 ******************************************************************************/
 #include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
 
 #include "rsa_encrypt.h"
 #include "big_number.h"
+#include "large_number.h"
 
 using namespace std;
 
 int main()
 {
-    /*
     RsaEncrypt rsa(61, 53);
 
     rsa.ProduceRsaKey();
@@ -45,17 +42,18 @@ int main()
     unsigned int DecryptInfo;   //解密后的信息
     DecryptInfo = rsa.Decrypt(EncryptInfo);
     cout << "DecryptInfo: " << DecryptInfo << endl;
-*/
+
     BigNumber big_number1("123");
     BigNumber big_number2("3");
     BigNumber big_number3("");
 
-    //big_number3 = big_number1 + big_number2;
+    big_number3 = big_number1 + big_number2;
+    big_number3.print();
 
-    //big_number3 = big_number1 - big_number2;
+    big_number3 = big_number1 - big_number2;
+    big_number3.print();
 
     big_number3 = big_number1 * big_number2;
-
     big_number3.print();
 
     return 0;

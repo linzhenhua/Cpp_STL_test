@@ -52,6 +52,11 @@ RsaEncrypt::RsaEncrypt(const RsaEncrypt &rhs)
 //ÖØÔØ=²Ù×÷·û
 RsaEncrypt& RsaEncrypt::operator=(const RsaEncrypt &rhs)
 {
+    if(this == &rhs)
+    {
+        return *this;
+    }
+
     prime1_ = rhs.prime1_;
     prime2_ = rhs.prime2_;
     product_ = rhs.product_;

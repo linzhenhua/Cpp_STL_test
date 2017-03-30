@@ -264,11 +264,3 @@ BigNumber operator*(const BigNumber &lhs, const BigNumber &rhs)
 
     return ret_temp;
 }
-
-
-//除法
-BigNumber operator/(const BigNumber &lhs, const BigNumber &rhs)
-{
-
-}
-
