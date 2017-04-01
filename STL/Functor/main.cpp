@@ -29,7 +29,7 @@ public:
 
     bool operator() (const int x) const
     {
-        return (x % 2 == 0);
+        return (x % value_ == 0);
     }
 
     operator int()
@@ -54,7 +54,7 @@ private:
     int value_;
 };
 
-void fun1()
+void Fun1()
 {
     int arr[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     vector<int> vec(arr, arr+10);
@@ -84,13 +84,73 @@ void fun1()
     //cout << endl;
     //cout << myFun + 10 << endl;
 
-    vector<int>::iterator i = remove_if(vec.begin(), vec.end(), Functor(2));
+    vector<int>::iterator i = remove_if(vec.begin(), vec.end(), Functor(3));
     copy(vec.begin(), i, ostream_iterator<int>(cout, " "));
+}
+
+void Not1()
+{
+    int arr[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    vector<int> vec(arr, arr+10);
+
+    for(vector<int>::iterator iter = vec.begin(); iter != vec.end(); ++iter)
+    {
+        cout << *iter << " ";
+    }
+    cout << endl;
+
+    vector<int>::iterator i = find_if(vec.begin(), vec.end(), bind2nd(less<int>(), 2)  );
+    if( i != vec.end() )
+    {
+        cout << *i << endl;
+    }
+
+    i = find_if(vec.begin(), vec.end(), not1( bind2nd(less<int>(), 2) ) );
+    if( i != vec.end() )
+    {
+        cout << *i << endl;
+    }
+}
+
+void Not2()
+{
+    int arr[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    vector<int> vec(arr, arr+10);
+
+    for(vector<int>::iterator iter = vec.begin(); iter != vec.end(); ++iter)
+    {
+        cout << *iter << " ";
+    }
+    cout << endl;
+
+    vector<int>::iterator i = find_if( vec.begin(), vec.end(), bind2nd(less<int>(), 2)  );
+    if( i != vec.end() )
+    {
+        cout << *i << endl;
+    }
+
+    sort(vec.begin(), vec.end(), not2( less<int>() )  );
+    for(vector<int>::iterator iter = vec.begin(); iter != vec.end(); ++iter)
+    {
+        cout << *iter << " ";
+    }
+    cout << endl;
+
+    sort(vec.begin(), vec.end(), less<int>() );
+    for(vector<int>::iterator iter = vec.begin(); iter != vec.end(); ++iter)
+    {
+        cout << *iter << " ";
+    }
+    cout << endl;
 }
 
 int main()
 {
-    fun1();
+    //Fun1();
+
+    //Not1();
+
+    Not2();
 
     return 0;
 }
