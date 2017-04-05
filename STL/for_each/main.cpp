@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -64,7 +65,7 @@ bool isPrime(int num)
         return false;
 
     //2,3,5,7,11,13,17,19
-    for(int i = 2; i < num/2; ++i) //test: 2,3,4,5,6,7,8
+    for(int i = 2; i <= (int)sqrt((double)num); ++i) //test: 2,3,4,5,6,7,8
     {
         if(num % i == 0)
             return false;
@@ -198,14 +199,14 @@ int main()
 
     //myTransform();
 
-    //myFind_if();
+    myFind_if();
 
     //for(int x = 0; x <= 20; ++x)
     //    isPrime(x);
 
     //mySort();
 
-    myTemplate();
+    //myTemplate();
 
     return 0;
 }

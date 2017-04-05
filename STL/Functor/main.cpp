@@ -32,6 +32,7 @@ public:
         return (x % value_ == 0);
     }
 
+    //×ª»»
     operator int()
     {
         return value_;

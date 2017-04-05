@@ -12,7 +12,6 @@ using namespace std;
 
 void Mem_fun()
 {
-    //字符串常量
     const char* arr[] = {"one", "two", "three", "four", "five", "six"};
 
     vector<string> vec( arr, arr + sizeof(arr) / sizeof(char*) );
@@ -31,7 +30,6 @@ void Mem_fun()
 
 void Ptr_fun()
 {
-    //字符串常量
     const char* arr[] = {"1", "2", "3", "4"};
 
     int arr1[4];
@@ -78,3 +76,4 @@ int main()
 
     return 0;
 }
+
