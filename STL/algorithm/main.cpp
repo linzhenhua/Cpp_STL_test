@@ -124,6 +124,11 @@ void Print(int x)
     cout << x << " ";
 }
 
+bool myfn(int i, int j)
+{
+    return abs(i) < abs(j);
+}
+
 void ForEach()
 {
     vector<int> vec;
@@ -134,19 +139,19 @@ void ForEach()
     }
     copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
     cout << endl;
-/*
+
     for_each(vec.begin(), vec.end(), Mul2);
 
     copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
     cout << endl;
-
+/*
     for_each( vec.begin(), vec.end(), not1( ptr_fun(IsOdd) ) );
 
     copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
     cout << endl;
-*/
 
     for_each(vec.begin(), vec.end(), Print);
+*/
 }
 
 void Count()
@@ -173,7 +178,7 @@ void MinElement()
 
     for(int i = 1; i < 10; ++i)
     {
-        vec.push_back(i);
+        vec.push_back(-i);
     }
     copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
     cout << endl;
@@ -185,6 +190,10 @@ void MinElement()
     vector<int>::iterator my_max_element = max_element(vec.begin(), vec.end());
 
     cout << *my_max_element << endl;
+
+    vector<int>::iterator my_element = max_element(vec.begin(), vec.end(), myfn);
+
+    cout << *my_element << endl;
 }
 
 void Find()
@@ -230,6 +239,74 @@ void Search()
         cout << iter - vec.begin() << endl;
         cout << *iter << endl;
     }
+
+    iter = search_n(vec.begin(), vec.end(), 4, 3, greater<int>());
+    if(iter != vec.end())
+    {
+        cout << iter - vec.begin() << endl;
+        cout << *iter << endl;
+    }
+}
+
+void FindEnd()
+{
+    int arr1[] = {0,1,2,3,4,5,0,1,7,8,9};
+    vector<int> vec(arr1, arr1+10);
+
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    int arr2[] = {0,1};
+    vector<int>::iterator iter = find_end(vec.begin(), vec.end(), arr2, arr2+2);
+    if(iter != vec.end())
+        cout << iter - vec.begin() << endl;
+}
+
+void FindFirstOf()
+{
+    int arr1[] = {0,10,2,3,4,5,0,1,7,8,9};
+    vector<int> vec(arr1, arr1+11);
+
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    int arr2[] = {0,10,2};
+
+    vector<int>::iterator iter = find_first_of(vec.begin(), vec.end(), arr2, arr2+3);
+    if(iter != vec.end())
+        cout << iter - vec.begin() << endl;
+}
+
+void AdjacentFind()
+{
+    int arr1[] = {0,10,2,3,3,5,0,1,7,8,9};
+    vector<int> vec(arr1, arr1 + sizeof(arr1)/sizeof(int));
+
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    vector<int>::iterator iter = adjacent_find(vec.begin(), vec.end());
+    if(iter != vec.end())
+        cout << iter - vec.begin() << endl;
+}
+
+void Equal()
+{
+    int arr1[] = {0,10,2,3,3,5,0,1,7,8,9};
+    vector<int> vec(arr1, arr1 + sizeof(arr1)/sizeof(int));
+
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    bool flag = equal(vec.begin(), vec.end(), arr1);
+    if(flag)
+    {
+        cout << "vec have arr2" << endl;
+    }
+    else
+    {
+        cout << "vec no have arr2" << endl;
+    }
 }
 
 int main()
@@ -246,7 +323,15 @@ int main()
 
     //Find();
 
-    Search();
+    //Search();
+
+    //FindEnd();
+
+    //FindFirstOf();
+
+    //AdjacentFind();
+
+    Equal();
 
     return 0;
 }
