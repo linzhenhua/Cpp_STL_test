@@ -2,6 +2,8 @@
 #include <vector>
 #include <algorithm>
 #include <iterator>
+#include <utility>
+#include <string>
 
 using namespace std;
 
@@ -309,6 +311,66 @@ void Equal()
     }
 }
 
+bool mypredicate(int i, int j)
+{
+  return (i==j);
+}
+
+void Mismatch()
+{
+    int arr1[] = {0,10,2,3,3,5,0,1,7,8,9};
+    vector<int> vec( arr1, arr1 + sizeof(arr1)/sizeof(int) );
+
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    int arr2[] = {0,10,3,3,3,5,0,1,7,9,9};
+
+    copy(arr2, arr2+sizeof(arr2)/sizeof(int), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    pair<vector<int>::iterator, int*> my_pair;
+
+    my_pair = mismatch(vec.begin(), vec.end(), arr2);
+    if(my_pair.first != vec.end())
+        cout << *my_pair.first << " " << *my_pair.second << endl;
+
+    my_pair.first++;
+    my_pair.second++;
+
+    my_pair = mismatch(my_pair.first, vec.end(), my_pair.second, mypredicate);
+    if(my_pair.first != vec.end())
+        cout << *my_pair.first << " " << *my_pair.second << endl;
+}
+
+void Copy()
+{
+    int arr1[] = {0,1,2,3,3,5,0,1,7,8,9};
+    vector<int> vec( arr1, arr1 + sizeof(arr1)/sizeof(int) );
+
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    vector<int> vec1;
+
+    copy(vec.begin(), vec.end(), back_inserter(vec1));
+    copy(vec1.begin(), vec1.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    vector<int> vec2(10);
+    copy_backward(vec.begin(), vec.end(), vec2.end());
+    copy(vec2.begin(), vec2.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    vector<int> vec3;
+    vec3.assign(vec2.begin(), vec2.end());
+    copy(vec3.begin(), vec3.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    //copy(istream_iterator<string>(cin),istream_iterator<string>(),
+    //     ostream_iterator<string>(cout, "\n") );
+}
+
 int main()
 {
     //myAlgorithm();
@@ -331,7 +393,13 @@ int main()
 
     //AdjacentFind();
 
-    Equal();
+    //Equal();
+
+    //Mismatch();
+
+    Copy();
+
+
 
     return 0;
 }
