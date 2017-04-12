@@ -579,14 +579,97 @@ void Partition()
 
 void Sort()
 {
+    srand((unsigned int)time(0));     //初始化随机数生成器
+
     int arr1[] = {9,8,7,6,5,4,3,2,1};
+
     vector<int> vec( arr1, arr1 + sizeof(arr1)/sizeof(int) );
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    random_shuffle(vec.begin(), vec.end(), MyRandom);
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    stable_sort(vec.begin(), vec.end());
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    random_shuffle(vec.begin(), vec.end(), MyRandom);
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    partial_sort(vec.begin(), vec.begin()+4, vec.end());
 
     copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
     cout << endl;
 
-    partial_sort(vec.begin(), vec.begin()+3, vec.end());
+    random_shuffle(vec.begin(), vec.end(), MyRandom);
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
 
+    vector<int> vec1(15);
+    vector<int>::iterator iter = partial_sort_copy(vec.begin(), vec.end(), vec1.begin(), vec1.end());
+    copy(vec1.begin(), iter, ostream_iterator<int>(cout, " "));
+    cout << endl;
+}
+
+bool myfunction (int i, int j)
+{
+    return (i>j);
+}
+
+void NthElement()
+{
+    srand((unsigned int)time(0));     //初始化随机数生成器
+
+    int arr1[] = {9,8,7,6,5,4,3,2,1};
+
+    vector<int> vec( arr1, arr1 + sizeof(arr1)/sizeof(int) );
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    random_shuffle(vec.begin(), vec.end(), MyRandom);
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    nth_element(vec.begin(), vec.begin()+3, vec.end());
+
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    random_shuffle(vec.begin(), vec.end(), MyRandom);
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    nth_element(vec.begin(), vec.begin()+3, vec.end(), myfunction);
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+}
+
+void Heap()
+{
+    int arr1[] = {9,8,7,6,5,4,3,2,1};
+
+    vector<int> vec(arr1, arr1 + sizeof(arr1)/sizeof(int) );
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    make_heap(vec.begin(), vec.end());
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    vec.push_back(100);
+    push_heap(vec.begin(), vec.end());
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    pop_heap(vec.begin(), vec.end());
+    vec.pop_back();
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    sort_heap(vec.begin(), vec.end());
     copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
     cout << endl;
 }
@@ -635,7 +718,11 @@ int main()
 
     //Partition();
 
-    Sort();
+    //Sort();
+
+    //NthElement();
+
+    Heap();
 
     return 0;
 }
