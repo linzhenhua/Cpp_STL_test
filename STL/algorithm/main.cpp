@@ -6,6 +6,8 @@
 #include <iterator>
 #include <utility>
 #include <string>
+#include <utility>
+#include <numeric>
 
 using namespace std;
 
@@ -674,6 +676,113 @@ void Heap()
     cout << endl;
 }
 
+void Includes()
+{
+    int arr1[] = {9,8,7,6,5,4,3,2,1};
+
+    vector<int> vec(arr1, arr1 + sizeof(arr1)/sizeof(int) );
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    vector<int> vec1(arr1, arr1 + 3 );
+    copy(vec1.begin(), vec1.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    cout << "sort:" << endl;
+    sort(vec.begin(), vec.end());
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+    sort(vec1.begin(), vec1.end());
+    copy(vec1.begin(), vec1.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    if( includes(vec.begin(), vec.end(), vec1.begin(), vec1.end(), myfunction) )
+    {
+        cout << "has" << endl;
+        copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+        cout << endl;
+        copy(vec1.begin(), vec1.end(), ostream_iterator<int>(cout, " "));
+        cout << endl;
+    }
+    else
+    {
+        cout << "no has" << endl;
+        copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+        cout << endl;
+        copy(vec1.begin(), vec1.end(), ostream_iterator<int>(cout, " "));
+        cout << endl;
+    }
+}
+
+void Bound()
+{
+    int arr[] = {9,8,7,6,5,4,3,2,1};
+
+    vector<int> vec(arr, arr + sizeof(arr)/sizeof(int) );
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    cout << "sort:" << endl;
+    sort(vec.begin(), vec.end());
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    //>= 第一个可以插入的位置
+    vector<int>::iterator iter = lower_bound(vec.begin(), vec.end(), 5);
+    cout << *iter << endl;
+    vec.insert(iter, 10);
+
+    //> 最后一个可以插入的位置
+    iter = upper_bound(vec.begin(), vec.end(), 5);
+    cout << *iter << endl;
+    vec.insert(iter, 10);
+
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+}
+
+void Equal_range()
+{
+    int arr[] = {90,80,70,60,50,40,30,20,10};
+
+    vector<int> vec(arr, arr + sizeof(arr)/sizeof(int) );
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    cout << "sort:" << endl;
+    sort(vec.begin(), vec.end());
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    pair< vector<int>::iterator, vector<int>::iterator > my_pair;
+
+    my_pair = equal_range(vec.begin(), vec.end(), 60);
+
+    cout << my_pair.first - vec.begin() << " " << my_pair.second - vec.begin() << endl;
+}
+
+class MyClass
+{
+public:
+    int operator() (const int x, const int y)
+    {
+        return x + y;
+    }
+};
+
+void Accumulate()
+{
+    int arr[] = {9,8,7,6,5,4,3,2,1};
+
+    vector<int> vec(arr, arr + sizeof(arr)/sizeof(int) );
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    cout << accumulate(vec.begin(), vec.end(), 0) << endl;
+
+    cout << accumulate(vec.begin(), vec.end(), 10, MyClass()) << endl;
+}
+
 int main()
 {
     //myAlgorithm();
@@ -722,7 +831,15 @@ int main()
 
     //NthElement();
 
-    Heap();
+    //Heap();
+
+    //Includes();
+
+    //Bound();
+
+    //Equal_range();
+
+    Accumulate();
 
     return 0;
 }
