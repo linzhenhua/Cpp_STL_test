@@ -8,6 +8,7 @@
 #include <string>
 #include <utility>
 #include <numeric>
+#include <functional>
 
 using namespace std;
 
@@ -783,6 +784,28 @@ void Accumulate()
     cout << accumulate(vec.begin(), vec.end(), 10, MyClass()) << endl;
 }
 
+void LexicographicalCompare()
+{
+    int arr[] = {10,9,8,7,6,5,4,3,2,1};
+    vector<int> vec(arr, arr + sizeof(arr)/sizeof(int) );
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    int arr1[] = {10,9,8,8,6,5,4};
+    vector<int> vec1(arr1, arr1 + sizeof(arr1)/sizeof(int) );
+    copy(vec1.begin(), vec1.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    if( lexicographical_compare(vec.begin(), vec.end(), vec1.begin(), vec1.end()) )
+    {
+        cout << "vec < vec1" << endl;
+    }
+    else
+    {
+        cout << "vec > vec1" << endl;
+    }
+}
+
 int main()
 {
     //myAlgorithm();
@@ -839,7 +862,9 @@ int main()
 
     //Equal_range();
 
-    Accumulate();
+    //Accumulate();
+
+    LexicographicalCompare();
 
     return 0;
 }
