@@ -2,6 +2,7 @@
 #include <string>
 #include <cstdio>
 #include <cstring>
+#include <algorithm>
 
 using namespace std;
 
@@ -87,10 +88,64 @@ void String()
     str5.swap(str6);
     cout << str5 << " " << str6 << endl;
 
+    string str7("There are two needles two in this haystack with needles.");
 
+    size_t found1 = str7.find("two", 0);
+    if(found1 != string::npos)
+    {
+        cout << found1 << endl;
+    }
 
+    size_t found2 = str7.find("twq", found1+1, 2);
+    if(found2 != string::npos)
+    {
+        cout << found2 << endl;
+    }
 
+    size_t found3 = str7.rfind("two");
+    if(found3 != string::npos)
+    {
+        cout << found3 << endl;
+    }
 
+    size_t found4 = str7.find_first_of("are");   //find_first_of()查找“are”中出现的第一个
+    if(found4 != string::npos)
+    {
+        cout << found4 << endl;
+    }
+
+    string str8("lin");
+    string str9("zhen");
+
+    string str10 = str8 + str9;
+    cout << str10 << endl;
+
+    str10.append("hua");
+    cout << str10 << endl;
+
+    str10.insert(10, " is a C++ programer");
+    cout << str10 << endl;
+
+    str10.assign("hello");
+    cout << str10 << endl;
+}
+
+void Equal()
+{
+    string str11("linzhenhua");
+    string str12("linzhenhuai");
+
+    bool flag = equal( str11.begin(), str11.end(), str12.begin() );
+    cout << flag << endl;
+
+    //cout << (str11 == str12) << endl;
+
+    int ch[] = {1,2,3,4,5};
+    vector<int> vec1(ch, ch+2);
+    vector<int> vec2(ch, ch+1);
+
+    flag = equal( vec1.begin(), vec1.end(), vec2.begin() );
+    cout << flag << endl;
 }
 
 int main()
@@ -100,6 +155,8 @@ int main()
     //CopyOnWrite();
 
     //TestCopyOnWrite();
+
+    Equal();
 
     return 0;
 }
