@@ -167,11 +167,29 @@ void myVector()
     sort(++myVec.begin(), myVec.end());
 }
 
+void myReverseBase()
+{
+    vector<int> v;
+
+    v.reserve(5);
+
+    for(int i = 0; i < 5; ++i)
+    {
+        v.push_back(i);
+    }
+
+    vector<int>::reverse_iterator ri = find(v.rbegin(), v.rend(), 3);
+
+    vector<int>::iterator i(ri.base());
+
+    cout << *i << endl;
+}
+
 int main()
 {
     //myIterator();
 
-    myStream();
+    //myStream();
 
     //myReverse();
 
@@ -183,6 +201,8 @@ int main()
 
     //c++不允许任何修改基本类型(包括指针)临时值的行为，但对于类类型则允许
     //++fun();
+
+    myReverseBase();
 
     return 0;
 }
