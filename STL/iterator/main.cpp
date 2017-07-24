@@ -173,16 +173,31 @@ void myReverseBase()
 
     v.reserve(5);
 
-    for(int i = 0; i < 5; ++i)
+    for(int i = 0; i < 5; ++i)   //0,1,2,3,4
     {
         v.push_back(i);
     }
 
-    vector<int>::reverse_iterator ri = find(v.rbegin(), v.rend(), 3);
+    copy(v.begin(), v.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
 
-    vector<int>::iterator i(ri.base());
+    vector<int>::reverse_iterator ri = find(v.rbegin(), v.rend(), 3);    //3
+
+    if(ri == v.rend())
+    {
+        cout << "no find" << endl;
+        return ;
+    }
+
+    vector<int>::iterator i(ri.base());     //4
 
     cout << *i << endl;
+
+    //v.insert(ri, 10);
+
+    v.insert(i, 10);
+
+    copy(v.begin(), v.end(), ostream_iterator<int>(cout, " "));
 }
 
 int main()
