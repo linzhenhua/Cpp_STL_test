@@ -42,7 +42,7 @@ void effective_5()
 
 void fun(int *p)
 {
-    delete p;
+    delete []p;
 }
 
 void effective_7()
@@ -52,7 +52,7 @@ void effective_7()
     //分配内存
     for(int i = 0; i < 10; ++i)
     {
-        int *p = new int;
+        int *p = new int[10];
 
         vecptr.push_back(p);
     }
@@ -66,14 +66,16 @@ void effective_7()
     //释放内存2
     for_each(vecptr.begin(), vecptr.end(), fun);
 
-    //释放内存3：使用智能指针自动管理
-    //test begin
-    shared_ptr<int> sp(new int);
+    {
+        //释放内存3：使用智能指针自动管理
+        //test begin
+        shared_ptr<int> sp(new int);
 
-    *sp = 10;
+        *sp = 10;
 
-    cout << *sp << endl;
-    //test end
+        cout << *sp << endl;
+        //test end
+    }
 
     vector< shared_ptr<int> > vec;
 
@@ -86,9 +88,47 @@ void effective_7()
 
 }
 
+void effective_17()
+{
+    vector<int> vec;
 
+    vec.reserve(100);
 
+    for(int i = 0; i < 100; ++i)
+    {
+        vec.push_back(i);
+    }
 
+    cout << vec.size() << endl;
+
+    vector<int>().swap(vec);
+
+    cout << vec.size() << endl;
+}
+
+void effective_16()
+{
+    int arr[10] = {0,1,2,3,4,5,6,7,8,9};
+    vector<int> vec;
+
+    vec.reserve(10);
+
+    vec.insert(vec.begin(), arr, arr+sizeof(arr)/sizeof(int));
+
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    int *p = nullptr;
+
+    p = &vec[0];
+
+    vector<int>::iterator iter = vec.begin()+2;
+
+    p = &*iter;
+
+    cout << *p << endl;
+
+}
 
 
 
