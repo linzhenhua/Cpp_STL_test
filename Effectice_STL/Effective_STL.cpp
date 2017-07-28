@@ -1,10 +1,4 @@
-#include <iostream>
-#include <iterator>
-#include <vector>
-#include <algorithm>
-#include <memory>
-
-using namespace std;
+#include "Effective_STL.h"
 
 void effective_5()
 {
@@ -130,9 +124,185 @@ void effective_16()
 
 }
 
+//一个不考虑大小写的比较仿函数
+class FunComp
+{
+public:
+    bool operator()(const string &lhs, const string &rhs) const
+    {
+        string temp1;
+        temp1.reserve(lhs.size());
 
+        char arr;
 
+        for(int i = 0; i < lhs.size(); ++i)
+        {
+            if( 'a' <= lhs[i] && lhs[i] <= 'z' )
+            {
+                temp1.push_back(lhs[i]);
+            }
+            else
+            {
+                arr = lhs[i] + 32;
+                temp1.push_back(arr);
+            }
+        }
 
+        //string().swap(temp1);       //清空temp1
+        //temp1.reserve(rhs.size());
+
+        string temp2;
+        temp2.reserve(rhs.size());
+
+        for(int i = 0; i < rhs.size(); ++i)
+        {
+            if( 'a' <= rhs[i] && rhs[i] <= 'z' )
+            {
+                temp2.push_back(rhs[i]);
+            }
+            else
+            {
+                arr = rhs[i] + 32;        //如果是大写字母，则变成小写
+                temp2.push_back(arr);
+            }
+        }
+
+        //cout << temp1 << " ";
+        //cout << endl;
+
+        return temp1 < temp2;
+    }
+};
+
+/*
+bool test(const string &lhs, const string &rhs)
+{
+    string temp1;
+    temp1.reserve(lhs.size());
+
+    char arr;
+
+    for(int i = 0; i < lhs.size(); ++i)
+    {
+        if( 'a' <= lhs[i] && lhs[i] <= 'z' )
+        {
+            temp1.push_back(lhs[i]);
+        }
+        else
+        {
+            arr = lhs[i] + 32;
+            temp1.push_back(arr);
+        }
+    }
+
+    //string().swap(temp1);       //清空temp1
+    //temp1.reserve(rhs.size());
+
+    string temp2;
+    temp2.reserve(rhs.size());
+
+    for(int i = 0; i < rhs.size(); ++i)
+    {
+        if( 'a' <= rhs[i] && rhs[i] <= 'z' )
+        {
+            temp2.push_back(rhs[i]);
+        }
+        else
+        {
+            arr = rhs[i] + 32;        //如果是大写字母，则变成小写
+            temp2.push_back(arr);
+        }
+    }
+
+    //cout << temp1 << endl;
+
+    cout << temp2 << endl;
+
+    return temp1 < temp2;
+}
+*/
+
+void effective_19()
+{
+    //set<string, FunComp> Set;
+
+    string arr[10] = {"A", "b", "C", "d", "E", "F", "g", "h", "I", "J"};
+
+    //cout << "sizeof(arr):" << sizeof(arr) << "  " << sizeof(string) << endl;
+
+    //vector<string> vec(arr, arr+sizeof(arr)/sizeof(char));
+
+    set<string, FunComp> Set;
+    Set.insert(arr, arr+sizeof(arr)/sizeof(string));
+
+    //copy(Set.begin(), Set.end(), ostream_iterator<string>(cout, " ") );
+    //cout << endl;
+
+    for(set<string, FunComp>::const_iterator iter = Set.begin(); iter != Set.end(); ++iter)
+    {
+        cout << *iter << " ";
+    }
+    cout << endl;
+}
+
+//如果两个数相同，返回false
+class Fun1
+{
+public:
+    bool operator()(const int& lhs, const int& rhs) const
+    {
+        if(lhs > rhs)
+        {
+            return true;
+        }
+        else if(lhs < rhs)
+        {
+            return false;
+        }
+        else if(lhs == rhs)
+        {
+            return false;
+        }
+    }
+};
+
+void effective_21()
+{
+    set<int, less_equal<int> > Set;
+
+    Set.insert(10);
+
+    Set.insert(10);
+
+    for(set<int, less_equal<int> >::iterator iter = Set.begin(); iter != Set.end(); ++iter )
+    {
+        cout << *iter << endl;
+    }
+    cout << endl;
+
+    set<int, Fun1> Set1;
+
+    Set1.insert(10);
+
+    Set1.insert(10);
+
+    for(set<int, Fun1>::iterator iter = Set1.begin(); iter != Set1.end(); ++iter)
+    {
+        cout << *iter << endl;
+    }
+    cout << endl;
+
+    multiset<int> Mset;
+
+    Mset.insert(10);
+
+    Mset.insert(10);
+
+    for(multiset<int>::iterator iter = Mset.begin(); iter != Mset.end(); ++iter)
+    {
+        cout << *iter << endl;
+    }
+}
 
 
 
