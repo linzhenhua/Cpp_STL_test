@@ -304,7 +304,32 @@ void effective_21()
     }
 }
 
+void effective_28()
+{
+    vector<int> vec;
+    vec.reserve(5);
 
+    for(int i = 0; i <= 5; ++i)
+    {
+        vec.push_back(i);
+    }
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    vector<int>::reverse_iterator ri = find(vec.rbegin(), vec.rend(), 3);
+
+    //²åÈë²Ù×÷
+    vec.insert(ri.base(), 99);
+
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    ri = find(vec.rbegin(), vec.rend(), 99);
+    vec.erase((++ri).base());
+
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+}
 
 
 

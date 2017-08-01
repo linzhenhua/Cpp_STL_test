@@ -26,4 +26,8 @@ void effective_19();
 
 void effective_21();
 
+void effective_28();
+
+void effective_29();
+
 #endif    //EFFECTIVE_STL_H

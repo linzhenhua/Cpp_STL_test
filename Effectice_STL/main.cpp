@@ -16,7 +16,11 @@ int main()
 
     //cout << test("C", "b") << endl;
 
-    effective_21();
+    //effective_21();
+
+    //effective_28();
+
+    effective_29();
 
     return 0;
 }
