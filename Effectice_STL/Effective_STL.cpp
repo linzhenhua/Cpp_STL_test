@@ -1,4 +1,14 @@
-#include "Effective_STL.h"
+#include <iostream>
+#include <iterator>
+#include <vector>
+#include <algorithm>
+#include <memory>
+#include <set>
+#include <map>
+#include <string>
+#include <cctype>
+
+using namespace std;
 
 void effective_5()
 {
@@ -331,13 +341,176 @@ void effective_28()
     cout << endl;
 }
 
+void effective_31()
+{
+    cout << "test nth_element: " << endl;
 
+    vector<int> vec;
 
+    vec.reserve(10);
 
+    vec.push_back(2);
+    vec.push_back(1);
+    vec.push_back(5);
+    vec.push_back(6);
+    vec.push_back(9);
+    vec.push_back(4);
+    vec.push_back(8);
+    vec.push_back(3);
+    vec.push_back(7);
+    vec.push_back(0);
 
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
 
+    //random_shuffle(vec.begin(), vec.end());
 
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
 
+    nth_element(vec.begin(), vec.begin()+5, vec.end());
+
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    cout << "test partial_sort: " << endl;
+    //partial_sort
+    vector<int> vec1;
+
+    vec1.reserve(10);
+
+    vec1.push_back(2);
+    vec1.push_back(1);
+    vec1.push_back(5);
+    vec1.push_back(6);
+    vec1.push_back(9);
+    vec1.push_back(4);
+    vec1.push_back(8);
+    vec1.push_back(3);
+    vec1.push_back(7);
+    vec1.push_back(0);
+
+    copy(vec1.begin(), vec1.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    //random_shuffle(vec1.begin(), vec1.end());
+
+    copy(vec1.begin(), vec1.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    partial_sort(vec1.begin(), vec1.begin()+5, vec1.end());
+
+    copy(vec1.begin(), vec1.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+}
+
+void effective_32()
+{
+    vector<int> vec;
+
+    vec.reserve(10);
+
+    for(int i = 0; i < 10; ++i)
+    {
+        vec.push_back(i);
+    }
+
+    vec[1] = vec[3] = vec[5] = 99;
+
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    cout << vec.size() << endl;
+
+    vector<int>::iterator iter = remove(vec.begin(), vec.end(), 99);
+
+    //copy(vec.begin(), iter, ostream_iterator<int>(cout, " "));
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    vec.erase(iter, vec.end());
+
+    cout << vec.size() << endl;
+}
+
+bool fun33(const shared_ptr<int> &x)
+{
+    return 99 == *x;
+}
+
+void effective_33()
+{
+    vector<int*> vec;
+
+    vec.reserve(10);
+
+    for(int i = 0; i < 10; ++i)
+    {
+        vec.push_back( new int(i) );
+    }
+
+    for(vector<int*>::iterator iter = vec.begin(); iter != vec.end(); ++iter)
+    {
+        cout << **iter << " ";
+    }
+    //copy(vec.begin(), vec.end(), ostream_iterator<int*>(cout, " "));
+    cout << endl;
+
+    for(vector<int*>::iterator iter = vec.begin(); iter != vec.end(); ++iter)
+    {
+        delete *iter;
+        *iter = nullptr;
+    }
+
+    //使用智能指针
+    vector<shared_ptr<int> > vec1;
+
+    vec1.reserve(10);
+
+    for(int i = 0; i < 10; ++i)
+    {
+        vec1.push_back( shared_ptr<int>(new int(i)) );
+    }
+
+    for(vector<shared_ptr<int> >::iterator iter = vec1.begin(); iter != vec1.end(); ++iter)
+    {
+        cout << **iter << " ";
+    }
+    cout << endl;
+
+    *vec1[1] = *vec1[3] = *vec1[5] = 99;
+
+    for(vector<shared_ptr<int> >::iterator iter = vec1.begin(); iter != vec1.end(); ++iter)
+    {
+        cout << **iter << " ";
+    }
+    cout << endl;
+
+    vec1.erase( remove_if(vec1.begin(), vec1.end(), fun33), vec1.end() );
+
+    for(vector<shared_ptr<int> >::iterator iter = vec1.begin(); iter != vec1.end(); ++iter)
+    {
+        cout << **iter << " ";
+    }
+    cout << endl;
+}
+
+bool fun35(char c1, char c2)
+{
+    return tolower(c1) > tolower(c2);
+}
+
+void effective_35()
+{
+    string str1("linzhenhub");
+    string str2("LINZHENHUA");
+
+    bool flag;
+    flag = lexicographical_compare(str1.begin(), str1.end(), str2.begin(), str2.end(), fun35);
+
+    cout << std::boolalpha;
+    cout << flag << endl;
+}
 
 
 

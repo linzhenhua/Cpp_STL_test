@@ -1,17 +1,6 @@
 #ifndef EFFECTIVE_STL_H
 #define EFFECTIVE_STL_H
 
-#include <iostream>
-#include <iterator>
-#include <vector>
-#include <algorithm>
-#include <memory>
-#include <set>
-#include <map>
-#include <string>
-
-using namespace std;
-
 void effective_5();
 
 void effective_7();
@@ -28,6 +17,12 @@ void effective_21();
 
 void effective_28();
 
-void effective_29();
+void effective_31();
+
+void effective_32();
+
+void effective_33();
+
+void effective_35();
 
 #endif    //EFFECTIVE_STL_H
