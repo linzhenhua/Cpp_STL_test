@@ -512,8 +512,36 @@ void effective_35()
     cout << flag << endl;
 }
 
+class Class39
+{
+public:
+    bool operator() (const int &x) const
+    {
+        return (x%2 == 0);
+    }
+};
 
 
+void effective_39()
+{
+    vector<int> vec;
+
+    vec.reserve(10);
+
+    for(int i = 0; i < 10; ++i)
+    {
+        vec.push_back(i);
+    }
+
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    //Class39 C;
+    vec.erase( remove_if(vec.begin(), vec.end(), Class39()), vec.end() );
+
+    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+}
 
 
 
