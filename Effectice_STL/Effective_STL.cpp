@@ -7,6 +7,9 @@
 #include <map>
 #include <string>
 #include <cctype>
+#include <cstdlib>
+#include <ctime>
+#include <random>
 
 using namespace std;
 
@@ -543,9 +546,106 @@ void effective_39()
     cout << endl;
 }
 
+void effective_45()
+{
+    //对于未排序的区间：
+    vector<int> vec1;
+    vec1.reserve(10);
 
+    for(int i = 0; i < 10; ++i)
+    {
+        vec1.push_back(i);
+    }
+    vec1[0] = vec1[3] = vec1[5] = 99;
 
+    copy(vec1.begin(), vec1.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
 
+    int mycount = count(vec1.begin(), vec1.end(), 99);
+
+    cout << mycount << endl;
+
+    vector<int>::iterator iter = find(vec1.begin(), vec1.end(), 99);
+    if(iter != vec1.end())
+    {
+        cout << *iter << endl;
+    }
+
+    //对于已经排序的区间：
+    vector<int> vec2;
+    vec2.reserve(10);
+
+    for(int i = 0; i < 10; ++i)
+    {
+        vec2.push_back(i);
+    }
+    vec2[0] = vec2[3] = vec2[5] = 100;
+
+    copy(vec2.begin(), vec2.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    sort(vec2.begin(), vec2.end());
+
+    copy(vec2.begin(), vec2.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    bool flag = binary_search(vec2.begin(), vec2.end(), 100);
+
+    cout << flag << endl;
+
+    vector<int>::iterator iter1 = lower_bound(vec2.begin(), vec2.end(), 100);
+    vector<int>::iterator iter2 = upper_bound(vec2.begin(), vec2.end(), 100);
+
+    cout << (iter1 - vec2.begin()) << endl;
+    cout << (iter2 - vec2.begin()) << endl;
+    cout << distance(iter1, iter2) << endl;
+
+    pair<vector<int>::iterator, vector<int>::iterator> mypair = equal_range(vec2.begin(), vec2.end(), 100);
+    cout << (mypair.first - vec2.begin()) << " " << (mypair.second - vec2.begin()) << endl;
+}
+
+void effective_46_1()
+{
+    vector<double> vec1;
+    vec1.reserve(20);
+
+    //srand((int)time(0));
+    random_device rd;
+
+    for(double i = 0.0; i < 20; ++i)
+    {
+        vec1.push_back(rd());
+    }
+
+    copy(vec1.begin(), vec1.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    sort(vec1.begin(), vec1.end(), greater<int>());
+}
+
+bool doubleGreater(double d1, double d2)
+{
+    return d1 > d2;
+}
+
+void effective_46_2()
+{
+    vector<double> vec1;
+    vec1.reserve(20);
+
+    //srand((int)time(0));
+    random_device rd;
+
+    for(double i = 0.0; i < 20; ++i)
+    {
+        vec1.push_back(rd());
+    }
+
+    copy(vec1.begin(), vec1.end(), ostream_iterator<int>(cout, " "));
+    cout << endl;
+
+    sort(vec1.begin(), vec1.end(), doubleGreater);
+}
 
 
 

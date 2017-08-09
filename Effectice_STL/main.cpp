@@ -28,7 +28,13 @@ int main()
 
     //effective_35();
 
-    effective_39();
+    //effective_39();
+
+    //effective_45();
+
+    //effective_46_1();
+
+    effective_46_2();
 
     return 0;
 }
